@@ -1,0 +1,505 @@
+/* Landing Page Styling - Premium Dark Theme with Glassmorphism */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ==================== KEYFRAME ANIMATIONS ==================== */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes borderPulse {
+  0% {
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    border-color: rgba(168, 85, 247, 0.6);
+  }
+  100% {
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+}
+
+@keyframes dottedBorderRotate {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), inset 0 0 20px rgba(99, 102, 241, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.5), inset 0 0 30px rgba(99, 102, 241, 0.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes thinkingBubbleFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, -12px) scale(1.05);
+  }
+}
+
+@keyframes dotBlink {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== LANDING CONTAINER ==================== */
+
+.landing-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0f172a;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Background gradients */
+.landing-bg-gradient {
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.landing-bg-glow {
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+/* ==================== CONTENT LAYOUT ==================== */
+
+.landing-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  width: 100%;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+/* ==================== HERO SECTION ==================== */
+
+.landing-hero {
+  margin-bottom: 60px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.landing-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.landing-gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  display: inline-block;
+}
+
+.landing-subtitle {
+  font-size: 1.25rem;
+  color: rgba(226, 232, 240, 0.7);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* ==================== FEATURE CARDS ==================== */
+
+.landing-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+  max-width: 100%;
+}
+
+.landing-feature-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  transform: scale(1);
+}
+
+.landing-feature-card:hover {
+  transform: scale(1.02);
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+.landing-card-icon {
+  font-size: 2.5rem;
+  color: #a855f7;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.landing-feature-card:hover .landing-card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.landing-feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 8px 0;
+}
+
+.landing-feature-card p {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==================== UPLOAD SECTION ==================== */
+
+.landing-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* Glassmorphism Upload Card */
+.landing-upload-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 2px dashed rgba(99, 102, 241, 0.4);
+  border-radius: 16px;
+  padding: 60px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  animation: borderPulse 3s ease-in-out infinite;
+}
+
+.landing-upload-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  background-size: 200% 200%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+.landing-upload-card:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.3), inset 0 0 40px rgba(99, 102, 241, 0.05);
+}
+
+.landing-upload-card.landing-dragging {
+  border-color: rgba(168, 85, 247, 0.8);
+  background: rgba(30, 41, 59, 0.9);
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.5), inset 0 0 50px rgba(99, 102, 241, 0.15);
+  transform: scale(1.01);
+}
+
+.landing-file-input {
+  display: none;
+}
+
+/* Upload Icon */
+.landing-upload-icon {
+  font-size: 3rem;
+  color: #6366f1;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.landing-upload-card:hover .landing-upload-icon {
+  color: #a855f7;
+  transform: scale(1.2);
+}
+
+/* Upload Text */
+.landing-upload-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 12px 0;
+}
+
+.landing-upload-subtitle {
+  font-size: 1rem;
+  color: rgba(226, 232, 240, 0.6);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.landing-file-name {
+  font-size: 0.9rem;
+  color: #a855f7;
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+/* ==================== THINKING INDICATOR ==================== */
+
+.landing-thinking-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing-thinking-bubble {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3));
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  animation: thinkingBubbleFloat 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.landing-thinking-text {
+  font-size: 1rem;
+  color: #a855f7;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== CTA BUTTON ==================== */
+
+.landing-cta-button {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.landing-cta-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.landing-cta-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+}
+
+.landing-cta-button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.landing-cta-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.landing-cta-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.landing-cta-button:hover:not(:disabled) svg {
+  transform: translateX(4px);
+}
+
+/* ==================== FOOTER INFO ==================== */
+
+.landing-footer-info {
+  text-align: center;
+  color: rgba(226, 232, 240, 0.5);
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+.landing-footer-info p {
+  margin: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 2.5rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1rem;
+  }
+
+  .landing-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .landing-upload-card {
+    padding: 40px 24px;
+    border-radius: 12px;
+  }
+
+  .landing-upload-icon {
+    font-size: 2.5rem;
+  }
+
+  .landing-upload-title {
+    font-size: 1.25rem;
+  }
+
+  .landing-cta-button {
+    padding: 14px 32px;
+    font-size: 1rem;
+  }
+
+  .landing-content {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .landing-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .landing-upload-card {
+    padding: 30px 20px;
+  }
+
+  .landing-upload-icon {
+    font-size: 2rem;
+  }
+
+  .landing-hero {
+    margin-bottom: 40px;
+  }
+
+  .landing-cards-grid {
+    margin-bottom: 30px;
+  }
+}
+
+/* ==================== DARK MODE CONSISTENCY ==================== */
+
+/* Ensure proper color contrast */
+:root {
+  --primary-bg: #0f172a;
+  --secondary-bg: #1e293b;
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --glass-bg: rgba(30, 41, 59, 0.5);
+  --text-light: #e2e8f0;
+  --text-muted: rgba(226, 232, 240, 0.6);
+}

@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  # Vector Database - Qdrant
+  vector-db:
+    image: qdrant/qdrant:latest
+    container_name: lumina-vector-db
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT_API_KEY=
+    networks:
+      - lumina-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:6333/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Backend API - FastAPI
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lumina-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      vector-db:
+        condition: service_started
+    environment:
+      - QDRANT_URL=http://vector-db:6333
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - PYTHON_UNBUFFERED=1
+    volumes:
+      - ./backend:/app
+      - ./backend/uploads:/app/uploads
+    networks:
+      - lumina-network
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Frontend - React/Vite
+  frontend:
+    build:
+      context: ./frontend/ui
+      dockerfile: Dockerfile
+    container_name: lumina-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE=http://localhost:8000
+    networks:
+      - lumina-network
+
+networks:
+  lumina-network:
+    driver: bridge
+
+volumes:
+  qdrant_data:
